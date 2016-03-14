@@ -1,0 +1,122 @@
+-- Haskell Playground 1.0
+doubleMe 20
+doubleUs 4 9
+doubleSmallNumber 199
+doubleSmallNumber' 40
+
+let lostNumbers = [4,8,15,16,23,42]
+
+[12,3,4] ++ [5, 7, 12]
+
+1 : [1,2,3,4,5,6]
+1:2:3:[4,5,6]
+
+"Benjamin Encz" !! 5
+
+
+[1,6] > [1,5]
+
+let a = [5,4,3,2,1]
+head a
+-- remainder of list without first element
+tail a
+last a
+init a
+length a
+null a
+null []
+reverse a
+take 2 a
+drop 2 a
+maximum a
+minimum a
+sum a
+product a
+-- infix notation for elem
+4 `elem` [3,4,5,6]
+elem 4 [3,4,5,6]
+-- infix notation for drop
+2 `drop` a
+-- prefix ++ operator 
+(++) [1,2,3] [3,4]
+-- range
+[1..20]
+[2,4..20]
+[0,10..100]
+-- infinite list
+take 10 [1,1..50]
+
+-- get the first 20 multiples of 2
+take 20 [2,4..]
+
+take 10 (cycle [1,2,3])
+take 10 (repeat 5)
+
+replicate 4 20
+
+[x*2 | x <- [1..10]] 
+
+[x*x | x <- [2,4..] ]
+
+[x*2 | x <- [1..10], x*2 >= 12]
+
+[x | x <- [50..100], x `mod` 7 == 3]
+
+boomBangs [7..13]
+
+--- multiple predicates
+[x | x <- [10..20], x /= 13, x /= 15, x /= 19]
+
+--- not equal /=
+
+15 /= 19
+
+--- product of two lists
+[ x*y | x <- [4,5,6], y <- [10,11,12]]
+--- product with predicate
+[ x*y | x <- [4,5,6], y <- [10,11,12], x*y > 50]
+
+let nouns = ["car", "house", "train"]
+let adjectives = ["fast", "static", "loud"]
+
+[adjective ++ " " ++ noun | adjective <- adjectives, noun <- nouns]  
+
+length' [1,2,3]
+
+removeNonUpCaseString "HelloWhyNot"
+
+let xxs = [[1,2,3],[4,5,6],[7,8,9]]
+
+---Keep odd numbers from all lists
+[[x | x <- xs, even x] | xs <- xxs]
+
+---Odd numbers larger 5
+[[x | x <- xs, even x, x > 5] | xs <- xxs]
+
+---Odd numbers larger 5, remove empty arrays
+let odd = [[x | x <- xs, even x, x > 5] | xs <- xxs]
+let oddRemovedEmpty = [x | x <- odd, (length x) > 0]
+
+---Odd numbers larger 5, flatten
+
+concat oddRemovedEmpty
+
+
+let tuplePerson = ("Maria", 34)
+
+fst tuplePerson
+
+snd tuplePerson
+
+zip [1,2,3,5] [4,5,6,9]
+
+---Lazy evaluation allows us to zip infinite lists
+zip [1..] ["apple", "banana", "orange"]
+
+let triangles = [ (a,b,c) | a <- [1..10], b <- [1..10], c <- [1..10] ]
+
+let rightTriangles = [ (a,b,c) | c <- [1..10], a <- [1..c], b <- [1..a], a^2 + b^2 == c^2, a+b+c == 24]
+
+rightTriangles
+
+

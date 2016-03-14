@@ -1,0 +1,11 @@
+name: SyntaxInFunctions
+version: 1.0
+cabal-version: 1.6
+build-type: Simple
+license: AllRightsReserved
+stability: experimental
+Executable SyntaxInFunctions
+  main-is: SyntaxInFunctions.hs
+  buildable: True
+  build-depends:
+      base -any

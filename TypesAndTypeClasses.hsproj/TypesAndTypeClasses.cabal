@@ -1,0 +1,11 @@
+name: TypesAndTypeClasses
+version: 1.0
+cabal-version: 1.6
+build-type: Simple
+license: AllRightsReserved
+stability: experimental
+Executable TypesAndTypeClasses
+  main-is: TypesAndTypeClasses.hs
+  buildable: True
+  build-depends:
+      base -any

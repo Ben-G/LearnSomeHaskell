@@ -1,0 +1,21 @@
+-- Haskell Playground 1.0
+removeNonUppercaseChars "Hello World"
+addThree 1 2 3
+
+(==)
+
+--- Read Type Class
+read "1" :: Int
+
+--- Enum Type Class
+[LT .. GT]
+['a' .. 'z']
+succ 'B'
+
+minBound :: Int
+
+let b = 20.0 :: Float
+let a = 20 :: Int
+-- From integral allows us to convert an `Int` into a more general `Num` so that it can be used for computation with e.g. a float type
+fromIntegral a + b
+
