@@ -39,3 +39,97 @@ third (_,_,c) = c
 head' :: [a] -> a
 head' [] = error "There's no head in an empty list!"
 head' (x:_) = x
+
+tell :: (Show a) => [a] -> String
+tell [] = "The list is empty"
+tell (x:[]) = "The list has one element " ++ show x
+tell (x:y:[]) = "The list has two elements " ++ show x ++ " " ++ show y 
+tell (x:_) = "The list is long."
+
+
+-- Recursive length
+length' :: [a] -> Int
+length' [] = 0
+length' (_:xs) = 1 + (length' xs)
+
+sum' :: (Num a) => [a] -> a
+sum' [] = 0
+sum' (x:xs) = x + (sum' xs)
+
+
+capital :: String -> String
+capital "" = "Empty String"
+-- @ is called 'patterns'
+capital all@(x:xs) = "The first letter of" ++ all ++ " is " ++ show x
+
+-- Pipes are called 'guards'
+bmiTell :: (RealFloat a) => a -> String
+bmiTell bmi
+      | bmi <= 18.5 = "You're underweight, you emo, you!"
+      | bmi <= 25.0 = "You're supposedly normal. Pffft, I bet you're ugly!"  
+      | bmi <= 30.0 = "You're fat! Lose some weight, fatty!"  
+      | otherwise   = "You're a whale, congratulations!" 
+      
+max' :: (Ord a) => a -> a -> a
+max' a b 
+  | a > b = a
+  | otherwise = b
+
+-- Guards can also be written in-line, albeit less readable
+max'' :: (Ord a) => a -> a -> a
+max'' a b | a > b = a | otherwise = b
+
+myCompare :: (Ord a) => a -> a -> Ordering
+a `myCompare` b
+  | a > b = GT
+  | a < b = LT
+  | otherwise = EQ
+  
+-- Using where statements we can create local variables for use within the guards. Indentations of all variable definition need to be aligned
+
+bmiTell' :: (RealFloat a) => a -> a -> String
+bmiTell' weight height
+      | bmi <= skinny = "You're underweight, you emo, you!"
+      | bmi <= normal = "You're supposedly normal. Pffft, I bet you're ugly!"  
+      | bmi <= fat = "You're fat! Lose some weight, fatty!"  
+      | otherwise   = "You're a whale, congratulations!"
+      where bmi = weight / height ^ 2
+            skinny = 18.5
+            normal = 25.0
+            fat = 30.0
+            
+-- We can also use pattern matching instead:
+
+bmiTell'' :: (RealFloat a) => a -> a -> String
+bmiTell'' weight height
+      | bmi <= skinny = "You're underweight, you emo, you!"
+      | bmi <= normal = "You're supposedly normal. Pffft, I bet you're ugly!"  
+      | bmi <= fat = "You're fat! Lose some weight, fatty!"  
+      | otherwise   = "You're a whale, congratulations!"
+      where bmi = weight / height ^ 2
+            (skinny, normal, fat) = (18.5, 25.0, 30.0)
+
+-- Another example of `where`
+
+initials :: String -> String -> String
+initials firstname lastname = [f] ++ ". " ++ [l] ++ "."
+  where (f:_) = firstname
+        (l:_) = lastname
+        
+-- Even though param pattern matching would have been easier here:
+        
+initials' :: String -> String -> String
+initials' (f:_) (l:_) = [f] ++ ". " ++ [l] ++ "."
+
+calcBmis :: (RealFloat a) => [(a, a)] -> [a]
+calcBmis xs = [bmi w h | (w, h) <- xs]
+  where bmi weight height = weight / height ^ 2
+
+-- Using let statements
+
+cylinder :: (RealFloat a) => a -> a -> a
+cylinder r h = 
+  let sideArea = 2 * pi * r * h
+      topArea = pi * r ^ 2
+  in  sideArea + 2 * topArea
+
