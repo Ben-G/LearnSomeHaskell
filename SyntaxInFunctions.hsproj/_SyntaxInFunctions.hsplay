@@ -47,3 +47,41 @@ initials "Benjamin" "Encz"
 initials' "Benjamin" "Encz"
 
 calcBmis [(50,1.6), (59,1.68)]
+
+cylinder 1.0 1.0
+
+-- let bindings are expressions
+4 * (let x = 10 in x) - 10
+
+-- let bindings can be used to create functions in local scope
+[let square x = x * x in (square 4, square 16)]
+
+-- pattern matching works as well, can be useful for tuple decomp
+
+(let (a,b,c) = (1,2,3) in a+b+c) * 100
+
+calcBmisLet [(70, 2.1), (59, 1.68)]
+
+calcBmisLetOnlyOverweight [(70, 2.1), (59, 1.68)]
+
+-- Basic list comprehension reminder
+[returnValue | returnValue <- [1..10]]
+
+-- Very basic list comprehension with let
+-- Just rebinding return value in let
+[ab | some <- [1..10], let ab = some]
+
+-- List comprehension with let in which we 
+--- double each input value
+[ab | some <- [1..10], let ab = 2 * some]
+
+--- Let can be defined top level when ommiting `in` for scoping
+let topLevelAdd x y = x + y
+topLevelAdd 3 4
+
+head'' [1,2,3]
+
+describeList [1,2]
+describeList [1,2,3]
+
+describeList'' [1,2]

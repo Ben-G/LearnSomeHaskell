@@ -132,4 +132,42 @@ cylinder r h =
   let sideArea = 2 * pi * r * h
       topArea = pi * r ^ 2
   in  sideArea + 2 * topArea
+  
+-- Use let with list comprehension
+calcBmisLet :: (RealFloat a) => [(a, a)] -> [a]
+calcBmisLet xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2]
+-- In example above:
+-- `bmi` is output function (everything before the pipe)
 
+calcBmisLetOnlyOverweight :: (RealFloat a) => [(a, a)] -> [a]
+calcBmisLetOnlyOverweight xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2, bmi >= 25.0]
+
+-- `bmi` cannot be used within `(w, h) <- xs`, since this is defined before the let binding
+
+-- Pattern matching:
+-- Pattern matching for function arguments is just syntactical sugar for
+-- regular pattern matching
+
+head'' :: [a] -> a
+head'' xs = case xs of [] -> error "No head for empty lists!"
+                       (x:_) -> x
+                       
+
+-- Inline pattern matching as part of other expressions
+describeList :: [a] -> String  
+describeList xs = "The list is " ++ case xs of [] -> "empty."  
+                                               [x] -> "a singleton list."
+                                               [x,y] -> "a two element list."   
+                                               xs -> "a longer list." 
+-- Because pattern matching in function definitions is syntactivc sugar,
+-- we can also use where clause                                               
+describeList' :: [a] -> String  
+describeList' xs = "The list is " ++ what xs  
+    where what [] = "empty."  
+          what [x] = "a singleton list."  
+          what xs = "a longer list."  
+          
+-- Or plain old argument matching
+describeList'' :: [a] -> String
+describeList'' [] = "Empty List"
+describeList'' [x,y] = "Two Element List" 
