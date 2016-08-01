@@ -1,0 +1,22 @@
+-- Haskell Playground 1.0
+--maximum' []
+maximum' [1]
+maximum' [1,2,3,4]
+maximum'' [1,5, 2,3,4]
+
+replicate' 3 9
+
+take' 2 [9,8,7,6,5,4]
+
+reverse' [1,2,3]
+
+repeat' 2
+
+zip' [8,9,10] [1,2]
+
+elem' 9 [1,2,3,4,9]
+elem' 8 [1,2,3,4,9]
+
+
+quicksort [8,2,7,3,1,5]
+
